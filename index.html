@@ -133,28 +133,28 @@
         loop
         playsinline
       >
-        <source src="videos/Law-building.mp4" type="video/mp4" />
+        <source src="videos/Law.mp4" type="video/mp4" />
       </video>
       <div class="hero-content relative text-center px-6 py-20">
         <h1
           style="
             color: black;
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial,
+            font-family: 'Times New Roman', Times, serif, 'Arial Narrow', Arial,
               sans-serif;
           "
           class="text-5xl md:text-7xl font-bold text-white mb-6"
         >
-          Bridging Zambia's Legal Future
+          Bridging Zambia's Legal Future.
         </h1>
         <p style="color: black" class="text-xl md:text-2xl text-gray-200 mb-8">
           Empowering law students through networking, career opportunities, and
-          real-world experience.
+          real-world experience, We are the bridge between the Law community and the people.
         </p>
         <div class="space-x-4">
           <a
             href="#join"
             style="color: black"
-            class="btn-primary btn-ripple btn-animate px-6 py-3 rounded-full transition-transform transform hover:scale-105"
+            class="btn-secondary btn-ripple btn-animate px-6 py-3 rounded-full border border-white hover:bg-white hover:text-primary transition-transform transform hover:scale-105"
             >Get Started</a
           >
           <a
@@ -175,7 +175,7 @@
         <p class="max-w-3xl mx-auto leading-relaxed">
           Law Bridge Zambia is a student-led initiative in Lusaka, connecting
           law students with practicing professionals through mentorship, skills
-          workshops, and helping the community learn about Law.
+          workshops, and helping the community learn about common Law.
         </p>
       </section>
 
@@ -214,7 +214,7 @@
               Career Opportunities
             </h3>
             <p>
-              Access internships, clerkships, and volunteer roles at leading law
+              Access internships, clerkships and volunteer roles at leading law
               firms and NGOs.
             </p>
           </article>
@@ -241,8 +241,8 @@
           class="mx-auto w-full max-w-4xl rounded-lg shadow-lg mb-4 transition-transform transform hover:scale-105"
         />
         <p class="max-w-2xl mx-auto">
-          Our dedicated team of legal students and experts are committed to
-          bridging the gap between legal education and practice in Zambia.
+          We are a dedicated team of legal students and experts who are committed to
+          bridging the gap between the law community and the people.
         </p>
       </section>
 
@@ -253,7 +253,7 @@
       >
         <h2 class="text-4xl font-bold mb-4">Ready to Bridge the Gap?</h2>
         <p class="text-lg mb-6">
-          Join us in empowering the next generation of legal practitioners.
+          Empowering the next generation of legal practitioners.
         </p>
         <button
           onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });"
@@ -280,46 +280,79 @@
         <form
           class="max-w-xl mx-auto space-y-6 bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg"
           novalidate
+          method="POST"
+          action="mailto:mapalomapunlanga65@gmail.com"
+          id="contactForm"
         >
           <div>
-            <label for="name" class="block mb-2">Name</label
-            ><input
+            <label for="name" class="block mb-2">Name</label>
+            <input
               id="name"
               name="name"
               type="text"
               placeholder="Your Name"
               required
               class="w-full px-4 py-2 border rounded-lg focus:border-secondary focus:outline-none"
+              style="color: black"
             />
+              Please enter your name.
+            </p>
           </div>
           <div>
-            <label for="email" class="block mb-2">Email</label
-            ><input
+            <label for="email" class="block mb-2">Email</label>
+            <input
               id="email"
               name="email"
               type="email"
               placeholder="you@example.com"
               required
               class="w-full px-4 py-2 border rounded-lg focus:border-secondary focus:outline-none"
+              style="color: black"
             />
+            <p class="text-red-600 text-sm mt-1 hidden" id="emailError">
+              Please enter a valid email.
+            </p>
           </div>
           <div>
-            <label for="message" class="block mb-2">Message</label
-            ><textarea
+            <label for="message" class="block mb-2">Message</label>
+            <textarea
               id="message"
               name="message"
               rows="4"
               placeholder="How can we help you?"
               required
               class="w-full px-4 py-2 border rounded-lg focus:border-secondary focus:outline-none"
-            ></textarea>
+              style="color: black"
+            ></textarea
+            >
+            <p class="text-red-600 text-sm mt-1 hidden" id="messageError">
+              Please enter a message.
+            </p>
           </div>
-          <button
+            <button
             type="submit"
             class="btn-primary btn-ripple btn-animate w-full py-3 font-semibold rounded-full transition-transform transform hover:scale-105"
-          >
+            onclick="showThankYouPopup(event)"
+            >
             Send Message
-          </button>
+            </button>
+            <div id="popup" class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 p-8 rounded-xl shadow-2xl z-50">
+            <p class="text-xl text-green-600 font-semibold mb-4">Thank you for your message!</p>
+            <p class="mb-6">We will get back to you soon.</p>
+            <button onclick="closePopup()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Close</button>
+            </div>
+            <script>
+            function showThankYouPopup(event) {
+              event.preventDefault();
+              document.getElementById('popup').classList.remove('hidden');
+              document.getElementById('contactForm').reset();
+            }
+
+            function closePopup() {
+              document.getElementById('popup').classList.add('hidden');
+            }
+            </script>
+          </p>
         </form>
       </section>
     </main>
@@ -408,11 +441,55 @@
           navMenu.classList.remove("flex");
         }
       });
-      // Form Validation
-      document.querySelector("form").addEventListener("submit", (e) => {
-        if (!e.target.checkValidity()) {
-          e.preventDefault();
-          alert("Please fill all fields correctly.");
+      // Form Validation and Submission Handling
+      const form = document.getElementById("contactForm");
+      const nameInput = document.getElementById("name");
+      const emailInput = document.getElementById("email");
+      const messageInput = document.getElementById("message");
+      const nameError = document.getElementById("nameError");
+      const emailError = document.getElementById("emailError");
+      const messageError = document.getElementById("messageError");
+      const successMessage = document.getElementById("successMessage");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        let valid = true;
+
+        // Name validation
+        if (!nameInput.value.trim()) {
+          nameError.classList.remove("hidden");
+          valid = false;
+        } else {
+          nameError.classList.add("hidden");
+        }
+
+        // Email validation
+        const emailPattern = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+        if (!emailInput.value.trim() || !emailPattern.test(emailInput.value)) {
+          emailError.classList.remove("hidden");
+          valid = false;
+        } else {
+          emailError.classList.add("hidden");
+        }
+
+        // Message validation
+        if (!messageInput.value.trim()) {
+          messageError.classList.remove("hidden");
+          valid = false;
+        } else {
+          messageError.classList.add("hidden");
+        }
+
+        if (valid) {
+          // Show success message
+          successMessage.classList.remove("hidden");
+          // Optionally, reset the form
+          form.reset();
+          // Optionally, submit the form if backend is set up
+          // form.submit();
+        } else {
+          successMessage.classList.add("hidden");
         }
       });
       // What We Offer Click Interaction
